@@ -35,12 +35,13 @@ def transform(kwargs):
 
 
 def _put(stream):
-    b = stream.read()
-    digest = sha1(b).hexdigest()
-    size = len(b)
+    b = stream.read()  # 读取流的内容
+    digest = sha1(b).hexdigest()  # 计算内容的 SHA1 哈希
+    size = len(b)  # 直接从读取的内容获取大小
     
-    if len(stream.getvalue()) > 2 ** 23:
-        b = get_fs().put(b)
+    # 使用变量 `size` 而不是 `stream.getvalue()`
+    if size > 2 ** 23:
+        b = get_fs().put(b)  # 如果内容大于指定大小，存储到文件系统
     
     return dict(
         content=b,
@@ -48,6 +49,7 @@ def _put(stream):
         short=digest[-6:],
         size=size
     )
+
 
 
 def _get(content):
