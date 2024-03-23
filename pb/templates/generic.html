@@ -2,13 +2,63 @@
 
 {% block head %}
 {% if css is defined and css %}
-<link href="/{{ css }}.css" type="text/css" rel="stylesheet"/>
+<!--<link href="{{ css }}" type="text/css" rel="stylesheet"/>-->
 {% else %}
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, sans;
+  }
+
+  .pannel {
+    width: 50vw;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  a {
+    color: #83ccee;
+    text-decoration: none;
+  }
+
+  pre {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    line-height: 50px;
+  }
+
+  h2 {
+    line-height: 40px;
+  }
+
+  p {
+    font-size: 18px;
+    line-break: 60px;
+  }
+
+  li li {
+    margin-left: 25px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .pannel {
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  }
+</style>
 {{ super() }}
 {% endif %}
 {% endblock %}
 {% block body %}
 <div class="pannel">
-    {{ content | safe }}
+  {{ content | safe }}
 </div>
 {% endblock %}
