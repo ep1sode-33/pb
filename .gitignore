@@ -13,5 +13,6 @@ dist/
 .eggs/
 node_modules/
 .cache
+.idea
 
 ChangeLog

@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: system-ui, sans;
+}
+
+#pb {
+  width: 80%;
+  margin: 0 auto;
+}
+
+a {
+  color: #83ccee;
+  text-decoration: none;
+}

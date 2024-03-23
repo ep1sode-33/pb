@@ -41,8 +41,8 @@ def _url(endpoint, **kwargs):
 @paste.route('/')
 def index():
     content = rst(render_template("index.rst"))
-
-    return render_template("generic.html", content=content)
+    css = 'style'
+    return render_template("generic.html", content=content, css=css)
 
 
 def _auth_namespace(namespace):
