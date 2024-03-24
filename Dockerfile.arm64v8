@@ -3,7 +3,19 @@ FROM arm64v8/python:3.6-alpine3.7
 WORKDIR /pb
 ADD . /build
 
-RUN apk add --no-cache --virtual .build-deps git \
+# 安装 curl 并在构建时检查地理位置，以决定是否使用清华大学的镜像源
+RUN apk add --no-cache --virtual .fetch-deps curl \
+    && if curl -s ipinfo.io | grep '"country": "CN"' > /dev/null; then \
+         echo "Using Chinese mirrors for APK and PIP"; \
+         # 设置 APK 使用清华大学镜像源
+         echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.7/main" > /etc/apk/repositories; \
+         echo "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.7/community" >> /etc/apk/repositories; \
+         pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple; \
+       else \
+         echo "Not using Chinese mirrors"; \
+       fi \
+    && apk del .fetch-deps \
+    && apk add --no-cache --virtual .build-deps git \
     && pip install /build \
     && apk del .build-deps
 
