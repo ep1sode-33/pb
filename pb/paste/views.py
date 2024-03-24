@@ -14,7 +14,7 @@ from io import BytesIO
 from mimetypes import guess_type
 from uuid import UUID
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for
 from pygments.formatters import HtmlFormatter, get_all_formatters
 from pygments.styles import get_all_styles
 from pygments.util import ClassNotFound
@@ -41,9 +41,7 @@ def _url(endpoint, **kwargs):
 @paste.route('/')
 def index():
     content = rst(render_template("index.rst"))
-
     return render_template("generic.html", content=content)
-
 
 def _auth_namespace(namespace):
     uuid = request.headers.get('X-Namespace-Auth')
