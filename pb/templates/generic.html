@@ -1,9 +1,6 @@
 {% extends "layout.html" %}
 
 {% block head %}
-{% if css is defined and css %}
-<!--<link href="{{ css }}" type="text/css" rel="stylesheet"/>-->
-{% else %}
 <style>
   * {
     padding: 0;
@@ -55,7 +52,6 @@
   }
 </style>
 {{ super() }}
-{% endif %}
 {% endblock %}
 {% block body %}
 <div class="pannel">

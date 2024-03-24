@@ -41,9 +41,7 @@ def _url(endpoint, **kwargs):
 @paste.route('/')
 def index():
     content = rst(render_template("index.rst"))
-    css = url_for("static", filename='style.css')
-    return render_template("generic.html", content=content, css=css)
-
+    return render_template("generic.html", content=content)
 
 def _auth_namespace(namespace):
     uuid = request.headers.get('X-Namespace-Auth')
